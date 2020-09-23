@@ -12,10 +12,10 @@ spec:
     tokenRef:
       name: github-token # the git provider token created previously
   gitRepository:
-    name: team-victor # <- specify repository name
+    name: my-wkp-workspace # <- specify repository name
     owner: wkp-example-org # <- replace org with your GitHub organization
     teams:
-      - team-victor # <- specify which teams should be given access to the repository (optional)
+      - team-alpha # <- specify which teams should be given access to the repository (optional)
   clusterScope:
     role: namespace-admin
     namespaces:
