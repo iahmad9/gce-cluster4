@@ -37,7 +37,7 @@
 # an SSH key for a user that has passwordless sudo permissions for each machine.
 # Value must be one of: `eks`, `wks-ssh`, or `wks-footloose`
 # [REQUIRED]
-track: wks-footloose
+track: wks-ssh
 
 # Name of the cluster being created.
 # If no `gitUrl` value (below) is provided, the `clusterName` will be the name
@@ -46,11 +46,11 @@ track: wks-footloose
 # If left blank, defaults to: `wk-${USER}`
 # Value must be 1-100 characters matching the pattern:
 #   '[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*'
-clusterName: ''
+clusterName: 'gce-cluster4'
 
 # `github` or `gitlab`
 # [REQUIRED]
-gitProvider: gitlab
+gitProvider: github
 
 # The Git Provider organization that will be used to create new repository and deploy key.
 #
@@ -65,7 +65,7 @@ gitProvider: gitlab
 #
 # The user doing the install should have her ssh key associated with the organization.
 # [REQUIRED] if no `gitUrl` is provided
-gitProviderOrg: ''
+gitProviderOrg: 'iahmad9'
 
 # Providing a `gitUrl` will bypass automatic repo creation
 # (and thereby bypass the `gitProviderOrg` value above).
@@ -78,11 +78,11 @@ gitUrl: ''
 
 # Name of docker hub user for fetching images
 # [REQUIRED]
-dockerIOUser: ''
+dockerIOUser: 'iahmad9'
 
 # Path to a file containing password for docker hub user account
 # [REQUIRED]
-dockerIOPasswordFile: ''
+dockerIOPasswordFile: '/Users/iahmad/weaveworks/dockerpass'
 
 # Path to a certificate used to encrypt sealed secrets.
 # If left blank a self signed certificate will be created.
@@ -173,7 +173,7 @@ wksConfig:
 
   # Minimum disk space in GB
   # that is required for the cluster to be installed
-  minDiskSpace: 20
+  minDiskSpace: 15
 
   #
   # SSH-specific configuration
@@ -183,7 +183,7 @@ wksConfig:
     # User name to be used when accessing cluster machines via
     # ssh. The user must have 'sudo' privileges on each machine in the
     # cluster. If left blank, defaults to: `root`
-    sshUser: 'root'
+    sshUser: 'wks'
 
     # Path to SSH key file containing private key which provides access to
     # the cluster machines. The key must correspond to a user with sudo
@@ -191,7 +191,7 @@ wksConfig:
     # In the `wks-ssh` track, if left blank, defaults to `~/.ssh/id_rsa`.
     # In the `wks-footloose` track, if left blank, a new key pair will be created at
     # setup/cluster-key and setup/cluster-key.pub.
-    sshKeyFile: ''
+    sshKeyFile: '../ssh_key'
 
     # An array of machine specs for all machines provided to the cluster.
     # A machine spec consists of:
@@ -216,7 +216,25 @@ wksConfig:
     #   privatePort: `<SSH port value (integer)>`
     #
     # [REQUIRED]
-    machines: []
+    machines:
+    - role: master
+      name: master-01
+      publicAddress: 35.189.253.27
+      publicPort: 22
+      privateAddress: 10.132.0.2
+      privatePort: 22
+    - role: worker
+      name: worker-01
+      publicAddress: 35.205.185.203
+      publicPort: 22
+      privateAddress: 10.132.0.3
+      privatePort: 22
+    - role: worker
+      name: worker-02
+      publicAddress: 35.205.134.238
+      publicPort: 22
+      privateAddress: 10.132.0.4
+      privatePort: 22
 
   #
   # Footloose-specific configuration
