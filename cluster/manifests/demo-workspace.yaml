@@ -31,8 +31,8 @@ spec:
           limits:
           - type: Container
             max:
-              memory: 1Gi
+              memory: 2Gi
             min:
-              memory: 500Mi
+              memory: 501Mi
     networkPolicy: workspace-isolation
 
