@@ -22,9 +22,9 @@ spec:
       - name: demo-app # <- target namespace
         resourceQuota: # <- optional field, defines a resource quota for namespace
           hard:
-            requests.cpu: "1"
+            requests.cpu: "2"
             requests.memory: 1Gi
-            limits.cpu: "2"
+            limits.cpu: "1"
             limits.memory: 2Gi
       - name: demo-db # <- another target namespace
         limitRange:   # <- optional field, defines a limit range for namespace
